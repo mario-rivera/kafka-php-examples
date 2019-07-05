@@ -1,0 +1,10 @@
+###> ide ###
+/.vscode
+/.idea
+###< ide ###
+
+###> application ###
+.env
+composer.lock
+vendor/
+###< application ###

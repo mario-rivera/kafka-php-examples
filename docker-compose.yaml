@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  php:
+    image: mariort/rdkafka-php-cli:0.1
+    volumes:
+      - .:/app
+    networks: 
+      - default
+    command: bash
+    
+networks:
+  default:
+    name: ${DOCKER_DEFAULT_NETWORK}
