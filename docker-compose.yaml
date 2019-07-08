@@ -5,10 +5,15 @@ services:
     image: mariort/rdkafka-php-cli:0.1
     volumes:
       - .:/app
+    env_file:
+      - .dev.env
     networks: 
       - default
+      - kafka
     command: bash
     
 networks:
   default:
     name: ${DOCKER_DEFAULT_NETWORK}
+  kafka:
+    name: ${KAFKA_NETWORK}

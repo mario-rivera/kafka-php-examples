@@ -5,6 +5,7 @@
 
 ###> application ###
 .env
+.*.env
 composer.lock
 vendor/
 ###< application ###

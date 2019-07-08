@@ -1,3 +1,10 @@
+## Run PHP Console
+
+```bash
+$ docker-compose run --rm \
+php
+```
+
 ## Installing Composer Dependencies
 
 ```bash
@@ -10,8 +17,7 @@ composer
 #### Require a composer package
 
 ```bash
-$ docker-compose \
--f ./docker/compose/bootstrap.yml \
+$ docker-compose -f $(pwd)/docker/compose/commands.yaml \
 --project-directory $(pwd) \
 run --rm --no-deps --user $(id -u):$(id -g) \
 composer composer require -n --ignore-platform-reqs --no-scripts \
@@ -26,48 +32,6 @@ $ docker-compose \
 --project-directory $(pwd) \
 run --rm --no-deps --user $(id -u):$(id -g) \
 composer composer update -n --ignore-platform-reqs --no-scripts
-```
-
-## Run PHP Console
-
-```bash
-$ docker-compose run --rm \
-php
-```
-
-## Running Kafka containers
-
-```bash
-$ docker-compose -f $(pwd)/docker/compose/kafka.yaml \
---project-directory $(pwd) \
-up -d kafka zookeeper
-```
-
-## Create Kafka Topic
-
-```bash
-$ docker-compose -f $(pwd)/docker/compose/kafka.yaml \
---project-directory $(pwd) \
-run --rm --no-deps \
-crudtopic
-```
-
-## Display Kafka Topic List
-
-```bash
-$ docker-compose -f $(pwd)/docker/compose/kafka.yaml \
---project-directory $(pwd) \
-run --rm --no-deps \
-topiclist
-```
-
-## Listen for Kafka Topic
-
-```bash
-docker-compose -f $(pwd)/docker/compose/kafka.yaml \
---project-directory $(pwd) \
-exec kafka \
-/usr/bin/kafka-console-consumer --bootstrap-server localhost:9092 --topic test
 ```
 
 ## Overloading Xdebug configuration
