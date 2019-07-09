@@ -1,7 +1,8 @@
 {
     "require": {
         "php-di/php-di": "^6.0",
-        "enqueue/rdkafka": "^0.9.12"
+        "enqueue/rdkafka": "^0.9.12",
+        "nubs/random-name-generator": "^2.1"
     },
     "autoload": {
         "psr-4": {

@@ -2,7 +2,7 @@
 
 ```bash
 $ docker-compose run --rm \
-php
+-e CONSUMER_PARTITION=0 php
 ```
 
 ## Installing Composer Dependencies
