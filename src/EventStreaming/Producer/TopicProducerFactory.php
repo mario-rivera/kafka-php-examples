@@ -12,23 +12,28 @@ class TopicProducerFactory
     private $container;
 
     /**
-     * @var Context
-     */
-    private $context;
-
-    /**
      * @param Context $context
      */
     public function __construct(
-        ContainerInterface $container,
-        Context $context
+        ContainerInterface $container
     ){
         $this->container = $container;
-        $this->context = $context;
     }
 
-    public function create(string $topic)
+    public function create(string $class, string $topic): MessageProducerInterface
     {
+        $context = $this->container->get(Context::class);
 
+        $dispatcher = $this->container->get(MessageDispatcher::class);
+        $dispatcher
+        ->setProducer($context->createProducer())
+        ->setDestination($context->createTopic($topic));
+
+        $producer = new $class;
+        $producer
+        ->setContext($context)
+        ->setDispatcher($dispatcher);
+
+        return $producer;
     }
 }

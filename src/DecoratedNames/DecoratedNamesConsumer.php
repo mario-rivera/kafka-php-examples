@@ -1,10 +1,10 @@
 <?php
-namespace App\EventProcessing;
+namespace App\DecoratedNames;
 
 use App\EventStreaming\Processor\MessageProcessorInterface;
 use Interop\Queue\Message;
 
-class MessageProcessor implements MessageProcessorInterface
+class DecoratedNamesConsumer implements MessageProcessorInterface
 {
     /**
      * @param Message $message

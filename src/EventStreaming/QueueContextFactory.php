@@ -10,7 +10,7 @@ class QueueContextFactory
     {
         $connectionFactory = new RdKafkaConnectionFactory([
             'global' => [
-                'group.id' => (empty(getenv('CONSUMER_GROUP_ID'))) ? getenv('CONSUMER_GROUP_ID') : uniqid('', true),
+                'group.id' => (empty(getenv('CONSUMER_GROUP'))) ? getenv('CONSUMER_GROUP') : uniqid('', true),
                 'metadata.broker.list' => $broker,
                 'enable.auto.commit' => 'true',
             ],

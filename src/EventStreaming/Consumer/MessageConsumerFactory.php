@@ -12,19 +12,12 @@ class MessageConsumerFactory
     private $context;
 
     /**
-     * @var MessageProcessorInterface
-     */
-    private $messageProcessor;
-
-    /**
      * @param Context $context
      */
     public function __construct(
-        Context $context,
-        MessageProcessorInterface $messageProcessor
+        Context $context
     ){
         $this->context = $context;
-        $this->messageProcessor = $messageProcessor;
     }
 
     /**
@@ -41,8 +34,7 @@ class MessageConsumerFactory
         $consumer->setOffset(0);
 
         $instance = (new MessageConsumer)
-            ->setConsumer($consumer)
-            ->setMessageProcessor($this->messageProcessor);
+            ->setConsumer($consumer);
 
         return $instance;
     }

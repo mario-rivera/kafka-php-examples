@@ -2,7 +2,10 @@
 
 ```bash
 $ docker-compose run --rm \
--e CONSUMER_PARTITION=0 php
+-e CONSUMER_TOPIC=test \
+-e CONSUMER_GROUP=testgroup \
+-e CONSUMER_PARTITION=0 \
+php
 ```
 
 ## Installing Composer Dependencies

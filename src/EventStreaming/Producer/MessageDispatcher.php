@@ -5,7 +5,7 @@ use Interop\Queue\Destination;
 use Interop\Queue\Producer;
 use Interop\Queue\Message;
 
-class SimpleMessenger
+class MessageDispatcher implements MessageDispatcherInterface
 {
     /**
      * @var Producer
@@ -18,22 +18,22 @@ class SimpleMessenger
     private $destination;
 
     /**
-     * @param Destination $destination
-     * @return SimpleMessenger
-     */
-    public function setDestination(Destination $destination)
-    {
-        $this->destination = $destination;
-        return $this;
-    }
-
-    /**
      * @param Producer $producer
-     * @return SimpleMessenger
+     * @return MessageDispatcher
      */
-    public function setProducer(Producer $producer)
+    public function setProducer(Producer $producer): MessageDispatcherInterface
     {
         $this->producer = $producer;
+        return $this;
+    }
+    
+    /**
+     * @param Destination $destination
+     * @return MessageDispatcher
+     */
+    public function setDestination(Destination $destination): MessageDispatcherInterface
+    {
+        $this->destination = $destination;
         return $this;
     }
 
