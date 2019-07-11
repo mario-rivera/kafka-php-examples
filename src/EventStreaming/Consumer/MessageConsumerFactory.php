@@ -25,13 +25,13 @@ class MessageConsumerFactory
      * @param int $partition
      * @return MessageConsumer
      */
-    public function create(string $topic, int $partition): MessageConsumer
+    public function create(string $topic, int $partition = null): MessageConsumer
     {
         $topic = $this->context->createTopic($topic);
-        $topic->setPartition($partition);
+        // $topic->setPartition($partition);
 
         $consumer = $this->context->createConsumer($topic);
-        $consumer->setOffset(0);
+        // $consumer->setOffset(0);
 
         $instance = (new MessageConsumer)
             ->setConsumer($consumer);

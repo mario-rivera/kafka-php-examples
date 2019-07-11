@@ -26,7 +26,7 @@ class NamesConsumer implements MessageProcessorInterface
     public function process(Message $message): bool
     {
         echo $message->getBody() . PHP_EOL;
-        $this->decorator->decorate($message->getBody());
+        // $this->decorator->decorate($message->getBody());
         
         return true;
     }

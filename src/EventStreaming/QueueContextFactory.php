@@ -15,7 +15,7 @@ class QueueContextFactory
                 'enable.auto.commit' => 'true',
             ],
             'topic' => [
-                'auto.offset.reset' => 'beginning',
+                'auto.offset.reset' => 'latest',
             ],
         ]);
 
