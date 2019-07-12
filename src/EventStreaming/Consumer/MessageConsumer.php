@@ -5,7 +5,7 @@ use Interop\Queue\Consumer;
 
 use App\EventStreaming\Processor\MessageProcessorInterface;
 
-class MessageConsumer
+class MessageConsumer implements MessageReceiverInterface
 {
     /**
      * @var Consumer

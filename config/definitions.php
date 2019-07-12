@@ -15,9 +15,6 @@ return [
     \Interop\Queue\Context::class => 
         \DI\factory([\App\EventStreaming\QueueContextFactory::class, 'create'])
         ->parameter('conf', \DI\get('context.conf')),
-    \App\EventStreaming\Consumer\MessageConsumer::class =>
-        \DI\factory([\App\EventStreaming\Consumer\MessageConsumerFactory::class, 'create'])
-        ->parameter('topic', getenv('CONSUMER_TOPIC')),
     \App\EventStreaming\Producer\MessageDispatcherInterface::class => 
         \DI\factory([\App\EventStreaming\Producer\MessageDispatcherFactory::class, 'create']),
     /*** Define a producer ***/
@@ -26,4 +23,18 @@ return [
     /*** Define a producer ***/
     \App\DecoratedNames\DecoratedNamesProducer::class => \DI\autowire()
         ->constructorParameter('topic', getenv('DECORATED_NAMES_TOPIC')),
+    /*** Define a consumer ***/
+    \App\RandomNames\NamesConsumer::class => \DI\autowire()
+        ->constructorParameter(
+            'receiver', 
+            \DI\factory([\App\EventStreaming\Consumer\MessageConsumerFactory::class, 'create'])
+                ->parameter('topic', getenv('NAMES_TOPIC'))
+        ),
+    /*** Define a consumer ***/
+    \App\DecoratedNames\DecoratedNamesConsumer::class => \DI\autowire()
+        ->constructorParameter(
+            'receiver', 
+            \DI\factory([\App\EventStreaming\Consumer\MessageConsumerFactory::class, 'create'])
+                ->parameter('topic', getenv('DECORATED_NAMES_TOPIC'))
+        ),
 ];

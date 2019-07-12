@@ -1,9 +1,8 @@
-## Run PHP Console
+## PHP Console
 
 ```bash
 $ docker-compose run --rm \
--e CONSUMER_TOPIC=test -e CONSUMER_GROUP=group1 \
-php
+-e CONSUMER_GROUP=group1 php
 ```
 
 ## Installing Composer Dependencies
