@@ -15,13 +15,8 @@ interface MessageDispatcherInterface
 
     /**
      * @param Destination $destination
-     * @return MessageDispatcherInterface
-     */
-    public function setDestination(Destination $destination): MessageDispatcherInterface;
-
-    /**
      * @param Message $message
      * @return void
      */
-    public function send(Message $message);
+    public function send(Destination $destination, Message $message);
 }

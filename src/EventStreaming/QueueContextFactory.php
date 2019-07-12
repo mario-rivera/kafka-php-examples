@@ -6,19 +6,11 @@ use Enqueue\RdKafka\RdKafkaConnectionFactory;
 
 class QueueContextFactory
 {
-    public function create($broker): Context
+    /**
+     * @param mixed $conf
+     */
+    public function create($conf): Context
     {
-        $connectionFactory = new RdKafkaConnectionFactory([
-            'global' => [
-                'group.id' => (empty(getenv('CONSUMER_GROUP'))) ? getenv('CONSUMER_GROUP') : uniqid('', true),
-                'metadata.broker.list' => $broker,
-                'enable.auto.commit' => 'true',
-            ],
-            'topic' => [
-                'auto.offset.reset' => 'latest',
-            ],
-        ]);
-
-        return $connectionFactory->createContext();
+        return (new RdKafkaConnectionFactory($conf))->createContext();
     }
 }

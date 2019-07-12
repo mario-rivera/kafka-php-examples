@@ -13,6 +13,11 @@ class NamesConsumer implements MessageProcessorInterface
      */
     private $decorator;
 
+    /**
+     * @var int
+     */
+    private $count = 0;
+
     public function __construct(
         DecoratedNamesProducer $decorator
     ){
@@ -25,8 +30,8 @@ class NamesConsumer implements MessageProcessorInterface
      */
     public function process(Message $message): bool
     {
-        echo $message->getBody() . PHP_EOL;
-        // $this->decorator->decorate($message->getBody());
+        echo ++$this->count . '-' . $message->getBody() . PHP_EOL;
+        $this->decorator->decorate($message->getBody());
         
         return true;
     }

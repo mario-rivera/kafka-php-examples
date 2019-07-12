@@ -13,11 +13,6 @@ class MessageDispatcher implements MessageDispatcherInterface
     private $producer;
 
     /**
-     * @var Destination
-     */
-    private $destination;
-
-    /**
      * @param Producer $producer
      * @return MessageDispatcher
      */
@@ -26,23 +21,14 @@ class MessageDispatcher implements MessageDispatcherInterface
         $this->producer = $producer;
         return $this;
     }
-    
-    /**
-     * @param Destination $destination
-     * @return MessageDispatcher
-     */
-    public function setDestination(Destination $destination): MessageDispatcherInterface
-    {
-        $this->destination = $destination;
-        return $this;
-    }
 
     /**
+     * @param Destination $destination
      * @param Message $message
      * @return void
      */
-    public function send(Message $message)
+    public function send(Destination $destination, Message $message)
     {
-        $this->producer->send($this->destination, $message);
+        $this->producer->send($destination, $message);
     }
 }
