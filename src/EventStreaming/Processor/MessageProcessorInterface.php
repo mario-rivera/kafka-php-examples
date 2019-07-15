@@ -8,9 +8,15 @@ use App\EventStreaming\Consumer\MessageReceiverInterface;
 interface MessageProcessorInterface
 {
     /**
-     * @return MessageReceiverInterface
+     * @param string $destination
+     * @return MessageProcessorInterface
      */
-    public function getMessageReceiver(): MessageReceiverInterface;
+    public function setDestinationName(string $destination): MessageProcessorInterface;
+
+    /**
+     * @return string
+     */
+    public function getDestinationName(): string;
 
     /**
      * @param Message $message

@@ -2,34 +2,36 @@
 namespace App\DecoratedNames;
 
 use Interop\Queue\Message;
-
 use App\EventStreaming\Processor\MessageProcessorInterface;
-use App\EventStreaming\Consumer\MessageReceiverInterface;
 
 class DecoratedNamesConsumer implements MessageProcessorInterface
 {
-    /**
-     * @var MessageReceiverInterface
-     */
-    private $receiver;
-
     /**
      * @var int
      */
     private $count = 0;
 
-    public function __construct(
-        MessageReceiverInterface $receiver
-    ){
-        $this->receiver = $receiver;
+    /**
+     * @var string
+     */
+    private $topicName;
+
+    /**
+     * @param string $destination
+     * @return DecoratedNamesConsumer
+     */
+    public function setDestinationName(string $destination): MessageProcessorInterface
+    {
+        $this->topicName = $destination;
+        return $this;
     }
 
     /**
-     * @return MessageReceiverInterface
+     * @return string
      */
-    public function getMessageReceiver(): MessageReceiverInterface
+    public function getDestinationName(): string
     {
-        return $this->receiver;
+        return $this->topicName;
     }
 
     /**

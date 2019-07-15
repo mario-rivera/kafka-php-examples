@@ -25,13 +25,14 @@ class MessageConsumerFactory
      * @param int $partition
      * @return MessageConsumer
      */
-    public function create(string $topic): MessageConsumer
+    public function create(MessageProcessorInterface $processor): MessageConsumer
     {
-        $topic = $this->context->createTopic($topic);
+        $topic = $this->context->createTopic($processor->getDestinationName());
         $consumer = $this->context->createConsumer($topic);
 
         $instance = (new MessageConsumer)
-            ->setConsumer($consumer);
+            ->setConsumer($consumer)
+            ->setMessageProcessor($processor);
 
         return $instance;
     }

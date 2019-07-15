@@ -4,16 +4,14 @@ namespace App\RandomNames;
 use Interop\Queue\Message;
 
 use App\EventStreaming\Processor\MessageProcessorInterface;
-use App\EventStreaming\Consumer\MessageReceiverInterface;
-
 use App\DecoratedNames\DecoratedNamesProducer;
 
 class NamesConsumer implements MessageProcessorInterface
 {
     /**
-     * @var MessageReceiverInterface
+     * @var string
      */
-    private $receiver;
+    private $topicName;
 
     /**
      * @var DecoratedNamesProducer
@@ -26,19 +24,27 @@ class NamesConsumer implements MessageProcessorInterface
     private $count = 0;
 
     public function __construct(
-        MessageReceiverInterface $receiver,
         DecoratedNamesProducer $decorator
     ){
-        $this->receiver = $receiver;
         $this->decorator = $decorator;
     }
 
     /**
-     * @return MessageReceiverInterface
+     * @param string $destination
+     * @return NamesConsumer
      */
-    public function getMessageReceiver(): MessageReceiverInterface
+    public function setDestinationName(string $destination): MessageProcessorInterface
     {
-        return $this->receiver;
+        $this->topicName = $destination;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDestinationName(): string
+    {
+        return $this->topicName;
     }
 
     /**

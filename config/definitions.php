@@ -25,16 +25,8 @@ return [
         ->constructorParameter('topic', getenv('DECORATED_NAMES_TOPIC')),
     /*** Define a consumer ***/
     \App\RandomNames\NamesConsumer::class => \DI\autowire()
-        ->constructorParameter(
-            'receiver', 
-            \DI\factory([\App\EventStreaming\Consumer\MessageConsumerFactory::class, 'create'])
-                ->parameter('topic', getenv('NAMES_TOPIC'))
-        ),
+        ->method('setDestinationName', getenv('NAMES_TOPIC')),
     /*** Define a consumer ***/
     \App\DecoratedNames\DecoratedNamesConsumer::class => \DI\autowire()
-        ->constructorParameter(
-            'receiver', 
-            \DI\factory([\App\EventStreaming\Consumer\MessageConsumerFactory::class, 'create'])
-                ->parameter('topic', getenv('DECORATED_NAMES_TOPIC'))
-        ),
+        ->method('setDestinationName', getenv('DECORATED_NAMES_TOPIC')),
 ];
